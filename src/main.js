@@ -12,8 +12,8 @@ import 'font-awesome/css/font-awesome.min.css'
 
 Vue.use(VueAxios,axios);
 // axios.defaults.baseURL = '/api';
-axios.defaults.baseURL = 'http://192.168.50.197:8080/';
-// axios.defaults.baseURL = 'http://192.168.1.3:8080/';
+// axios.defaults.baseURL = 'http://192.168.50.197:8080/';
+axios.defaults.baseURL = 'http://192.168.1.2:8080/';
 axios.defaults.withCredentials = true; //一定要加上，解决因为跨域问题引起的后端sessionId不同导致取不到session中的验证码问题
 Vue.use(MintUI);
 Vue.config.productionTip = false;

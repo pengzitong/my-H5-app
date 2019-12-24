@@ -4,7 +4,7 @@
     <div class="user">
       <img src="../assets/user_bc.jpeg" alt="头像" @click="navToHome">
     </div>
-    <router-link class="enterHome" to="home">{{enterTip}}
+    <router-link class="enterHome" to="shop/registerShop">{{enterTip}}
       <i class="fa fa-arrow-circle-right" style="margin-left:0.1rem"></i>
     </router-link>
   </div>
@@ -22,7 +22,7 @@ export default {
     navToHome(){
        const fs = require('fs');
        console.log('111');
-      console.log(fs);  
+      console.log(fs);
       const data = new Uint8Array(Buffer.from('Node.js中文网'));
       fs.writeFile('./wenjian.txt', data, (err) => {
         if (err) throw err;

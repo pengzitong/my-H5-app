@@ -52,14 +52,14 @@
           <div class="label">验证码:</div>
           <div class="formPart">
               <input class="verifyCode" type="text" placeholder="请输入验证码" style="width:57%;vertical-align: middle" v-model="verifyCodeActual">
-              <img ref="verifyCode" v-bind:src="imgUrl" style="width:32%;vertical-align: middle" @click="changeVerifyCode($event)"/>    
+              <img ref="verifyCode" v-bind:src="imgUrl" style="width:32%;vertical-align: middle" @click="changeVerifyCode($event)"/>
           </div>
       </div>
       <div class="container-button">
         <mt-button class="button" @click.native="handleClick" type="default">取消</mt-button>
         <mt-button class="button" @click.native="handleClick" type="primary" style="background-color:#555">确认</mt-button>
       </div>
-     
+
     </div>
 </template>
 
@@ -68,9 +68,12 @@ import { Button } from 'mint-ui';
 import { Toast } from 'mint-ui';
 import { axios } from 'axios';
 import { url } from '../url';
+import { commonMethods } from '../common/util'
+
+
 
 export default {
-  name: 'home',
+  name: 'shop',
   data () {
     return {
       msg: 'Welcome to view my H5 demo!',
@@ -85,35 +88,59 @@ export default {
       },
       shopImg:null,
       verifyCodeActual:'',
-      param:{}
+      param:{},
+      isEdit:null
     }
   },
   created(){
-   this.axios(url.shopInitInfo).then((response)=>{
-        this.msg = response;
+    console.log('route' + this.$route.name);
+    let shopId = commonMethods.getQueryString("shopId");
+    this.isEdit = shopId ? true : false;
+    console.log(this.isEdit);
+    this.axios(url.shopInitInfo).then((response)=>{
+      if(response.status == 200) {
         this.shopCategoryList = response && response.data && response.data.shopCategoryList || [];
         this.areaList = response && response.data && response.data.areaList || [];
-      }).catch((err)=>{
-        console.log(err);
-      })
+        if (this.isEdit) {
+          this.axios.post(url.getByShopId, {shopId: shopId}).then(response => {
+            if(response.status == 200){
+              this.shop = response && response.data && response.data.shop ||
+                {
+                  shopCategory:{},
+                  area:{}
+                };
+            }
+          })
+        }
+      }
 
-    
+    }).catch((err)=>{
+        console.log(err);
+    })
+
+
   },
   methods:{
     handleClick(){
+      console.log(this.isEdit)
       if(!this.verifyCodeActual || this.verifyCodeActual == ''){
         Toast('请输入验证码！');
         return;
       }
-      Toast('请先注册！');
       this.param.shop = this.shop;
       var formdata = new FormData();
       formdata.append("shopStr",JSON.stringify(this.shop));
       formdata.append("shopImg",this.shopImg);
       formdata.append("verifyCodeActual",this.verifyCodeActual);
 
-      this.axios.post(url.registerShop,formdata).then((response)=>{
+      this.axios.post(this.isEdit ? url.modifyShop : url.registerShop,formdata).then((response)=>{
         console.log(response);
+        if(response.status == 200 && response.data && response.data.success){
+          let message = this.isEdit ? "修改成功！" : "创建成功！";
+          Toast(message);
+        }else{
+          Toast("操作失败！");
+        }
       }).catch((err)=>{
         console.log(err);
       })
@@ -123,7 +150,7 @@ export default {
     },
     imgChange(e){
       console.log(e);
-      
+
       console.log(this.$refs.shopImg.files[0]);
       this.shopImg = this.$refs.shopImg.files[0];
       // shopStr
@@ -185,7 +212,7 @@ export default {
     border: 1px solid #eee;
     padding-left: 0.1rem;
   }
-  
+
   div.formPart input[type="file"]{
     background-color: #eee;
     padding-top: 0.01rem;

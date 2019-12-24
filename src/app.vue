@@ -5,14 +5,14 @@
     <header class="header" v-show="$route.path != '/' && $route.path != '/welcome' ">
       <a class="showMenu" href="javascript:void(0);" @click="ifShow"><i class="fa fa-bars" @click="ifShow"></i></a>
     </header>
-    
+
     <div class="drawer-layout" ref="containerBox" :class="{'active':isActive}" v-show="$route.path != '/'  && $route.path != '/welcome'">
-          <router-link to="home">注册</router-link>
-          <router-link to="home">编辑</router-link>
-          <router-link to="home">店铺列表</router-link>
-          <router-link to="welcome">详情</router-link>
-          <router-link to="welcome">管理</router-link>
-          <router-link to="welcome">退出</router-link>
+          <router-link to="/shop">注册</router-link>
+          <router-link to="/shop">编辑</router-link>
+          <router-link to="/shop">店铺列表</router-link>
+          <router-link to="/welcome">详情</router-link>
+          <router-link to="/welcome">管理</router-link>
+          <router-link to="/welcome">退出</router-link>
     </div>
     <router-view/>
   </div>
@@ -32,6 +32,8 @@ export default {
     console.log(commonMethods);
     console.log(commonMethods.getQueryString("shopId"));
     console.log(this.$route.path);
+    console.log(this.$route);
+    console.log(window.location.search)
     let elem = document.querySelector(".drawer-layout");
     let self = this;
     document.addEventListener("click",function(e){
@@ -41,7 +43,6 @@ export default {
       }else{
         console.log(2);
       }
-     
       // this.$refs.containerBox.style.height = '100px';
     })
   },

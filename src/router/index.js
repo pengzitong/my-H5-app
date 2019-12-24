@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import welcome from '@/components/welcome'
-import home from '@/components/home'
+import shop from '@/components/shop'
 
 Vue.use(Router)
 
@@ -10,17 +10,28 @@ export default new Router({
     {
       path: '/',
       name: 'welcome',
-      component: welcome
+      redirect:'/welcome'
     },
     {
       path: '/welcome',
       name: 'welcome',
       component: welcome
     },
+    // {
+    //   path: '/shop',
+    //   name: 'shop',
+    //   // redirect:'/shop/registerShop',
+    //   component: shop
+    // },
     {
-      path: '/home',
-      name: 'home',
-      component: home
+      path: '/shop/registerShop',
+      name: 'shop.registerShop',
+      component: shop
+    },
+    {
+      path: '/shop/modifyShop',
+      name: 'shop.modifyShop',
+      component: shop
     }
   ]
 })
