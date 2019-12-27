@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import welcome from '@/components/welcome'
 import shop from '@/components/shop'
+import shopList from '../components/shopList'
 
 Vue.use(Router)
 
@@ -17,12 +18,12 @@ export default new Router({
       name: 'welcome',
       component: welcome
     },
-    // {
-    //   path: '/shop',
-    //   name: 'shop',
-    //   // redirect:'/shop/registerShop',
-    //   component: shop
-    // },
+    {
+      path: '/shop',
+      name: 'shop',
+      redirect:'/shop/registerShop',
+      // component: shop
+    },
     {
       path: '/shop/registerShop',
       name: 'shop.registerShop',
@@ -32,6 +33,11 @@ export default new Router({
       path: '/shop/modifyShop',
       name: 'shop.modifyShop',
       component: shop
+    },
+    {
+      path: '/shopList',
+      name: 'shopList',
+      component: shopList
     }
   ]
 })

@@ -50,7 +50,7 @@ module.exports = {
     cacheBusting: true,
 
     cssSourceMap: true,
-    
+
   },
 
   build: {
@@ -60,7 +60,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsPublicPath: './',
 
     /**
      * Source Maps

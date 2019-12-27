@@ -6,7 +6,7 @@
           <router-link to="welcome">详情</router-link>
           <router-link to="welcome">管理</router-link>
       </nav> -->
-      <div class="title"><strong>商店信息</strong></div>
+      <div class="title bold">商店信息</div>
       <div class="container">
           <div class="label">商铺名称:</div>
           <div class="formPart">
@@ -56,7 +56,7 @@
           </div>
       </div>
       <div class="container-button">
-        <mt-button class="button" @click.native="handleClick" type="default">取消</mt-button>
+        <mt-button class="button" @click="handleClick('cancel')" type="default">取消</mt-button>
         <mt-button class="button" @click.native="handleClick" type="primary" style="background-color:#555">确认</mt-button>
       </div>
 
@@ -121,7 +121,11 @@ export default {
 
   },
   methods:{
-    handleClick(){
+    handleClick(btnType){
+      if(btnType == 'cancel'){
+        this.$router.go(-1);
+        return;
+      }
       console.log(this.isEdit)
       if(!this.verifyCodeActual || this.verifyCodeActual == ''){
         Toast('请输入验证码！');
@@ -229,9 +233,9 @@ export default {
   .container-button .button{
     width: 40%;
   }
-  .title{
-    padding: 0.2rem 0;
-  }
+  /*.title{*/
+  /*  padding: 0.2rem 0;*/
+  /*}*/
   .box{
     height: 100%;
     /* background-color: #eef; */

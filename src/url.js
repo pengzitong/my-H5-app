@@ -5,6 +5,7 @@ const url = {
     registerShop:'shopAdmin/registerShop',
     getByShopId:'shopAdmin/getByShopId',
     modifyShop:'shopAdmin/modifyShop',
+    getShopList:'shopAdmin/getShopList',
     kaptcha:"/clinicCountManager/captchaImage"
 };
 

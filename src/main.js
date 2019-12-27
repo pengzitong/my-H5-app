@@ -4,11 +4,12 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import 'font-awesome/css/font-awesome.min.css'
-import MintUI from 'mint-ui'
+import MintUI from 'bh-mint-ui2'
 import 'mint-ui/lib/style.css'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-import 'font-awesome/css/font-awesome.min.css'
+import './common/custom.less'
+// import { Cell } from 'mint-ui';
 
 Vue.use(VueAxios,axios);
 // axios.defaults.baseURL = '/api';
@@ -16,6 +17,7 @@ Vue.use(VueAxios,axios);
 axios.defaults.baseURL = 'http://192.168.1.2:8080/';
 axios.defaults.withCredentials = true; //一定要加上，解决因为跨域问题引起的后端sessionId不同导致取不到session中的验证码问题
 Vue.use(MintUI);
+// Vue.component(Cell.name, Cell);
 Vue.config.productionTip = false;
 
 

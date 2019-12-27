@@ -4,7 +4,7 @@
     <div class="user">
       <img src="../assets/user_bc.jpeg" alt="头像" @click="navToHome">
     </div>
-    <router-link class="enterHome" to="shop/registerShop">{{enterTip}}
+    <router-link class="enterHome" to="shopList">{{enterTip}}
       <i class="fa fa-arrow-circle-right" style="margin-left:0.1rem"></i>
     </router-link>
   </div>

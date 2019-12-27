@@ -2,16 +2,16 @@
   <div id="app">
     <!-- <img src="./assets/welcome.jpeg"> -->
     <!-- <router-link to="/home">welcome</router-link> -->
-    <header class="header" v-show="$route.path != '/' && $route.path != '/welcome' ">
+    <header class="header" style="position: fixed;z-index: 1000000" v-show="$route.path != '/' && $route.path != '/welcome' ">
       <a class="showMenu" href="javascript:void(0);" @click="ifShow"><i class="fa fa-bars" @click="ifShow"></i></a>
     </header>
 
-    <div class="drawer-layout" ref="containerBox" :class="{'active':isActive}" v-show="$route.path != '/'  && $route.path != '/welcome'">
+    <div class="drawer-layout" ref="containerBox" @mouseleave="mouseout" :class="{'active':isActive}" v-show="$route.path != '/'  && $route.path != '/welcome'">
           <router-link to="/shop">注册</router-link>
           <router-link to="/shop">编辑</router-link>
-          <router-link to="/shop">店铺列表</router-link>
+          <router-link to="/shopList">店铺列表</router-link>
           <router-link to="/welcome">详情</router-link>
-          <router-link to="/welcome">管理</router-link>
+          <router-link to="/shop">商铺管理</router-link>
           <router-link to="/welcome">退出</router-link>
     </div>
     <router-view/>
@@ -44,12 +44,17 @@ export default {
         console.log(2);
       }
       // this.$refs.containerBox.style.height = '100px';
-    })
+    });
+
   },
   methods:{
     ifShow(e){
       e.stopPropagation();
       this.isActive = !this.isActive;
+      this.$refs.containerBox.style.height = document.querySelector('.box').offsetHeight + 'px';
+    },
+    mouseout(){
+      console.log(123)
     }
   }
 }
@@ -71,8 +76,9 @@ html,body{
   background-color: #555;
   /* opacity: 0.8; */
   box-shadow:2px 2px 5px #333333 ;
-  height: 100%;
-  position: absolute;
+  /*height: 100%;*/
+  position: fixed;
+  top: .5rem;
   /* left: -100%; */
   z-index: 100;
   transition:all .3s ease-in-out;
@@ -111,6 +117,7 @@ html,body{
 }
 .header{
   height: 0.5rem;
+  width: 100%;
   background-color: #333;
 }
 </style>
